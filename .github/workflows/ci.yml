@@ -7,20 +7,28 @@ on:
   - cron:  '0 0 * * *'
 
 jobs:
-  ci:
-    name: CI with Default Configuration
-    uses: bus1/cabuild/.github/workflows/ci-c-util.yml@v1
-    with:
-      cabuild_ref: "v1"
-      m32: true
-      matrixmode: true
-      mesonargs: '-Daudit=true -Ddocs=true'
+  #  ci:
+  #    name: CI with Default Configuration
+  #    uses: bus1/cabuild/.github/workflows/ci-c-util.yml@v1
+  #    with:
+  #      cabuild_ref: "v1"
+  #      m32: true
+  #      matrixmode: true
+  #      mesonargs: '-Daudit=true -Ddocs=true'
+  #
+  #  ci-valgrind:
+  #    name: Minimal CI Through Valgrind
+  #    uses: bus1/cabuild/.github/workflows/ci-c-util.yml@v1
+  #    with:
+  #      cabuild_ref: "v1"
+  #      matrixmode: true
+  #      mesonargs: '-Dlauncher=false'
+  #      valgrind: true
 
-  ci-valgrind:
-    name: Minimal CI Through Valgrind
+  ci-sanitizers:
+    name: CI with Address and Undefined Behavior sanitizers
     uses: bus1/cabuild/.github/workflows/ci-c-util.yml@v1
     with:
       cabuild_ref: "v1"
       matrixmode: true
-      mesonargs: '-Dlauncher=false'
-      valgrind: true
+      mesonargs: '-Db_sanitize=address,undefined --optimization=g -Dc_args="-fno-omit-frame-pointer"'
