@@ -1,0 +1,19 @@
+summary: Run dbus-broker under sanitizers
+test: ./test.sh
+recommend:
+    - dbus-daemon
+    - dfuzzer
+    - expat-devel
+    - gcc
+    - gdb
+    - git
+    - glibc-devel
+    - libasan
+    - libubsan
+    - meson
+    - systemd
+    - systemd-container
+    - systemd-devel
+    - systemd-libs
+    - util-linux
+duration: 30m
