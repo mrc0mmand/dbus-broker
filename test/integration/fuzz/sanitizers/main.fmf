@@ -1,0 +1,20 @@
+summary: Run dbus-broker under sanitizers
+test: ./test.sh
+require:
+    - compiler-rt
+    - dbus-broker
+    - dbus-daemon
+    - dfuzzer
+    - expat-devel
+    - clang
+    - llvm
+    - gdb
+    - git
+    - glibc-devel
+    - meson
+    - systemd
+    - systemd-container
+    - systemd-devel
+    - systemd-libs
+    - util-linux
+duration: 30m
