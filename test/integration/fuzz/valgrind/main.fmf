@@ -1,0 +1,9 @@
+summary: Concise summary describing what the test does
+test: ./test.sh
+recommend:
+    - dfuzzer
+    - systemd
+    - systemd-container
+    - util-linux
+    - valgrind
+duration: 30m

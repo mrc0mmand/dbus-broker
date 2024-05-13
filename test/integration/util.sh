@@ -64,6 +64,8 @@ ExecStart=systemd-nspawn --quiet --network-veth --keep-unit --machine=%i --boot 
                          --uuid=$CONTAINER_MACHINE_ID \
                          --hostname=$CONTAINER_NAME \
                          --overlay=/etc:$CONTAINER_OVERLAY/etc:/etc \
+                         --overlay=/home::/home \
+                         --overlay=/root::/root \
                          --overlay-ro=/usr:$CONTAINER_OVERLAY/usr:/usr
 EOF
     systemctl daemon-reload
