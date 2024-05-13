@@ -64,6 +64,8 @@ ExecStart=systemd-nspawn --quiet --network-veth --keep-unit --machine=%i --boot 
                          --uuid=$CONTAINER_MACHINE_ID \
                          --hostname=$CONTAINER_NAME \
                          --overlay=/etc:$CONTAINER_OVERLAY/etc:/etc \
+                         --overlay=/home::/home \
+                         --overlay=/root::/root \
                          --overlay-ro=/usr:$CONTAINER_OVERLAY/usr:/usr
 EOF
     systemctl daemon-reload
@@ -78,6 +80,11 @@ EOF
     mkdir -p "$CONTAINER_OVERLAY/etc/sysusers.d/"
     cat >"$CONTAINER_OVERLAY/etc/sysusers.d/testuser.conf" <<EOF
 u testuser - "Test User" /home/testuser
+EOF
+    # The sysusers.d snippet above doesn't create the home directory, so let's add a tmpfiles.d for that
+    mkdir -p "$CONTAINER_OVERLAY/etc/tmpfiles.d/"
+    cat >"$CONTAINER_OVERLAY/etc/tmpfiles.d/testuser.conf" <<EOF
+d /home/testuser 0700 testuser testuser
 EOF
 }
 

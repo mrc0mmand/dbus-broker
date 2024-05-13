@@ -1,0 +1,11 @@
+summary: Concise summary describing what the test does
+test: ./test.sh
+require:
+    - dbus-broker
+    - dbus-broker-debuginfo
+    - dfuzzer
+    - systemd
+    - systemd-container
+    - util-linux
+    - valgrind
+duration: 30m
