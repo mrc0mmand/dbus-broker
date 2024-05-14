@@ -22,6 +22,8 @@ actions:
     - rm -fv ".dist-git/sources"
     # Drop backported patches
     - sed -ri '/^Patch.*\\:.+\\.patch/d' ".dist-git/dbus-broker.spec"
+    # Build without optimizations to improve stack trace readability in CI
+    - sed -i '1i %global optflags %optflags -O0' .dist-git/dbus-broker.spec
 
   create-archive:
     # Override `git archive`, since we use subprojects.
